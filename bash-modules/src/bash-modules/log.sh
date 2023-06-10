@@ -43,9 +43,9 @@ error() {
     # STDERR is tty
     local __log_ERROR_BEGIN=$'\033[91m'
     local __log_ERROR_END=$'\033[39m'
-    echo "[$__log__APP] ${__log_ERROR_BEGIN}ERROR${__log_ERROR_END}: ${*:-}" >&2
+    echo "[$__log__APP] [$$] ${__log_ERROR_BEGIN}ERROR${__log_ERROR_END}: ${*:-}" >&2
   else
-    echo "[$__log__APP] ERROR: ${*:-}" >&2
+    echo "[$__log__APP] [$$] ERROR: ${*:-}" >&2
   fi
   log::stacktrace 2
 }
@@ -58,9 +58,9 @@ warn() {
     # STDERR is tty
     local __log_WARN_BEGIN=$'\033[96m'
     local __log_WARN_END=$'\033[39m'
-    echo "[$__log__APP] ${__log_WARN_BEGIN}WARN${__log_WARN_END}: ${*:-}" >&2
+    echo "[$__log__APP] [$$] ${__log_WARN_BEGIN}WARN${__log_WARN_END}: ${*:-}" >&2
   else
-    echo "[$__log__APP] WARN: ${*:-}" >&2
+    echo "[$__log__APP] [$$] WARN: ${*:-}" >&2
   fi
   log::stacktrace 2
 }
@@ -73,16 +73,16 @@ info() {
     # STDOUT is tty
     local __log_INFO_BEGIN=$'\033[92m'
     local __log_INFO_END=$'\033[39m'
-    echo "[$__log__APP] ${__log_INFO_BEGIN}INFO${__log_INFO_END}: ${*:-}"
+    echo "[$__log__APP] [$$] ${__log_INFO_BEGIN}INFO${__log_INFO_END}: ${*:-}"
   else
-    echo "[$__log__APP] INFO: ${*:-}"
+    echo "[$__log__APP] [$$] INFO: ${*:-}"
   fi
 }
 
 #>>
 #>> * `debug MESAGE...` - print debug message, when debugging is enabled only.
 debug() {
- [ "${__log__DEBUG:-}" != yes ] || echo "[$__log__APP] DEBUG: ${*:-}"
+ [ "${__log__DEBUG:-}" != yes ] || echo "[$__log__APP] [$$] DEBUG: ${*:-}"
 }
 
 #>>
@@ -94,9 +94,9 @@ log::fatal() {
     # STDERR is tty
     local __log_ERROR_BEGIN=$'\033[95m'
     local __log_ERROR_END=$'\033[39m'
-    echo "[$__log__APP] ${__log_ERROR_BEGIN}$LEVEL${__log_ERROR_END}: ${*:-}" >&2
+    echo "[$__log__APP] [$$] ${__log_ERROR_BEGIN}$LEVEL${__log_ERROR_END}: ${*:-}" >&2
   else
-    echo "[$__log__APP] $LEVEL: ${*:-}" >&2
+    echo "[$__log__APP] [$$] $LEVEL: ${*:-}" >&2
   fi
 }
 
@@ -109,9 +109,9 @@ log::error() {
     # STDERR is tty
     local __log_ERROR_BEGIN=$'\033[91m'
     local __log_ERROR_END=$'\033[39m'
-    echo "[$__log__APP] ${__log_ERROR_BEGIN}$LEVEL${__log_ERROR_END}: ${*:-}" >&2
+    echo "[$__log__APP] [$$] ${__log_ERROR_BEGIN}$LEVEL${__log_ERROR_END}: ${*:-}" >&2
   else
-    echo "[$__log__APP] $LEVEL: ${*:-}" >&2
+    echo "[$__log__APP] [$$] $LEVEL: ${*:-}" >&2
   fi
 }
 
@@ -124,9 +124,9 @@ log::warn() {
   # STDERR is tty
     local __log_WARN_BEGIN=$'\033[96m'
     local __log_WARN_END=$'\033[39m'
-    echo "[$__log__APP] ${__log_WARN_BEGIN}$LEVEL${__log_WARN_END}: ${*:-}" >&2
+    echo "[$__log__APP] [$$] ${__log_WARN_BEGIN}$LEVEL${__log_WARN_END}: ${*:-}" >&2
   else
-    echo "[$__log__APP] $LEVEL: ${*:-}" >&2
+    echo "[$__log__APP] [$$] $LEVEL: ${*:-}" >&2
   fi
 }
 
@@ -139,9 +139,9 @@ log::info() {
     # STDOUT is tty
     local __log_INFO_BEGIN=$'\033[92m'
     local __log_INFO_END=$'\033[39m'
-    echo "[$__log__APP] ${__log_INFO_BEGIN}${LEVEL}${__log_INFO_END}: ${*:-}"
+    echo "[$__log__APP] [$$] ${__log_INFO_BEGIN}${LEVEL}${__log_INFO_END}: ${*:-}"
   else
-    echo "[$__log__APP] ${LEVEL}: ${*:-}"
+    echo "[$__log__APP] [$$] ${LEVEL}: ${*:-}"
   fi
 }
 
@@ -182,9 +182,9 @@ dbg() {
     # STDERR is tty
     local __log_DBG_BEGIN=$'\033[96m'
     local __log_DBG_END=$'\033[39m'
-    echo "[$__log__APP] ${__log_DBG_BEGIN}DBG${__log_DBG_END}: ${__dbg_OUT//declare -? /}" >&2
+    echo "[$__log__APP] [$$] ${__log_DBG_BEGIN}DBG${__log_DBG_END}: ${__dbg_OUT//declare -? /}" >&2
   else
-    echo "[$__log__APP] DBG: ${__dbg_OUT//declare -? /}" >&2
+    echo "[$__log__APP] [$$] DBG: ${__dbg_OUT//declare -? /}" >&2
   fi
 }
 

@@ -136,10 +136,14 @@
 
       # Don't import module twice, to avoid loops.
       # Replace some special symbols in the module name by "_".
-      local -n __IMPORT_MODULE_DEFINED="__${__MODULE//[\[\]\{\}\/!@#$%^&*()=+~\`\\,?|\'\"-]/_}__DEFINED" # Variable reference
-      [ "${__IMPORT_MODULE_DEFINED:-}" != "yes" ] || return 0 # Already imported
-      __IMPORT_MODULE_DEFINED="yes"
-      unset -n __IMPORT_MODULE_DEFINED # Unset reference
+      local __NORMALIZED_MODULE_NAME=${__MODULE//[\[\]\{\}\/!@#$%^&*()=+~\`\\,?|\'\"-]/_}
+      [[ -v "__MODULE_IMPORTED_${__NORMALIZED_MODULE_NAME}" ]] && return 0 # Already imported]
+      eval "__MODULE_IMPORTED_${__NORMALIZED_MODULE_NAME}=yes"
+
+#      local -n __IMPORT_MODULE_DEFINED="__${__MODULE//[\[\]\{\}\/!@#$%^&*()=+~\`\\,?|\'\"-]/_}__DEFINED" # Variable reference
+#      [ "${__IMPORT_MODULE_DEFINED:-}" != "yes" ] || return 0 # Already imported
+#      __IMPORT_MODULE_DEFINED="yes"
+#      unset -n __IMPORT_MODULE_DEFINED # Unset reference
 
       # Import module
       source "$__PATH/$__MODULE.sh" || return 1

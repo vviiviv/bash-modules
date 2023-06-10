@@ -17,7 +17,7 @@ meta::copy_function() {
   local FUNCTION_NAME="$1"
   local PREFIX="$2"
 
-  eval "$PREFIX$(declare -fp $FUNCTION_NAME)"
+  eval "$PREFIX$(declare -f $FUNCTION_NAME)"
 }
 
 #>>

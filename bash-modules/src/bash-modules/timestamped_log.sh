@@ -29,13 +29,21 @@ timestamped_log::set_format() {
 #>>
 #>> ## Wrapped functions:
 #>>
-#>> `log::info`, `info`, `debug` - print timestamp to stdout and then log message.
+
+#>>
+#>> `debug` - print timestamp to stdout and then log message.
+meta::wrap \
+  '[ "${__log__DEBUG:-}" != yes ] || date::print_current_datetime "$__timestamped_log_format"' \
+  '' \
+  debug
+
+#>>
+#>> `log::info`, `info` - print timestamp to stdout and then log message.
 meta::wrap \
   'date::print_current_datetime "$__timestamped_log_format"' \
   '' \
   log::info \
-  info \
-  debug
+  info
 
 #>>
 #>> `log::error`, `log::warn`, `error`, `warn` - print timestamp to stderr and then log message.
